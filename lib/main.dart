@@ -5,6 +5,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:getx_pattern_access_token_app/binding/initial_binding.dart';
 import 'package:getx_pattern_access_token_app/routes/routes.dart';
 
+import 'localization/messages.dart';
+
 Future<void> main() async {
   await GetStorage.init();
 
@@ -17,6 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: Messages(), // your translations
+      locale: Locale('km', 'KM'), // translations will be displayed in that locale
+      fallbackLocale: Locale('km', 'KM'), // specify the fallback locale in case an invalid locale is selected.
       initialBinding: InitialBinding(),
       title: 'Getx Design Pattern',
       theme: ThemeData(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_pattern_access_token_app/constants/constant_language.dart';
 import 'package:getx_pattern_access_token_app/data/local/store_token.dart';
 import 'package:getx_pattern_access_token_app/features/home/home_controller.dart';
 import 'package:getx_pattern_access_token_app/routes/route_name.dart';
@@ -25,7 +26,10 @@ class HomeView extends GetView<HomeController> {
               },
               leading: Icon(Icons.dashboard, color: Colors.white),
               trailing: Icon(Icons.navigate_next, color: Colors.white),
-              title: Text("Dashboard", style: TextStyle(color: Colors.white)),
+              title: Text(
+                  ConstantLanguage.dashboard.tr,
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -33,14 +37,20 @@ class HomeView extends GetView<HomeController> {
       backgroundColor: Colors.white,
       appBar: AppBarCustomWidget(
         centerTitle: true,
-        title: "Home",
+        title: ConstantLanguage.home.tr,
         actions: [
           IconButton(
             onPressed: () {
               StoreToken.removeToken();
-              Get.offNamed("/");
+              Get.offNamed(RouteName.splash);
             },
             icon: Icon(Icons.logout, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: () {
+              controller.onChangeLanguage();
+            },
+            icon: Icon(Icons.language),
           ),
         ],
       ),

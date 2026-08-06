@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_pattern_access_token_app/features/admin/post/post_controller.dart';
+import 'package:getx_pattern_access_token_app/features/admin/post/list/post_controller.dart';
+import 'package:getx_pattern_access_token_app/routes/route_name.dart';
+import 'package:getx_pattern_access_token_app/widgets/app_bar_custom_widget.dart';
+import 'package:getx_pattern_access_token_app/widgets/loading_widget.dart';
+
 class PostView extends GetView<PostController> {
   const PostView({super.key});
 
@@ -8,20 +12,16 @@ class PostView extends GetView<PostController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: Text("List Post", style: TextStyle(color: Colors.white)),
-        actions: [
-          IconButton(
-            onPressed: () {
-            },
-            icon: Icon(Icons.add, color: Colors.white),
-          ),
-        ],
+      appBar: AppBarCustomWidget(title: "List Post",
+      actions: [
+        IconButton(onPressed: (){
+          Get.toNamed(RouteName.adminPostForm);
+        }, icon: Icon(Icons.add))
+      ],
       ),
       body: Obx(() {
         return controller.loading.value == true
-            ? Center(child: CircularProgressIndicator(color: Colors.cyan))
+            ? LoadingWidget()
             : RefreshIndicator(
                 onRefresh: () async {
                   controller.getAllPost();
