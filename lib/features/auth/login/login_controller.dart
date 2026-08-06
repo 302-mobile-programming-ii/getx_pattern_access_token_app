@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:getx_pattern_access_token_app/core/api/api_service.dart';
 import 'package:getx_pattern_access_token_app/data/local/store_token.dart';
+import 'package:getx_pattern_access_token_app/routes/route_name.dart';
 
 import '../../../core/models/auth/LoginRequest.dart';
 
@@ -34,7 +35,7 @@ class LoginController extends GetxController {
       StoreToken.setToken(responseLogin.accessToken ?? "");
       StoreToken.setRefresh(responseLogin.refreshToken ?? "");
       Get.snackbar("Success", "Login Success");
-      Get.offNamed("/home");
+      Get.offNamed(RouteName.home);
     }
   }
 }
