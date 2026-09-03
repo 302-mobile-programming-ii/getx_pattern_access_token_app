@@ -4,7 +4,6 @@ import 'package:getx_pattern_access_token_app/features/admin/dashboard/dashboard
 class DashboardBinding extends Bindings{
   @override
   void dependencies() {
-    // TODO: implement dependencies
     Get.lazyPut(()=> DashboardController());
   }
 
