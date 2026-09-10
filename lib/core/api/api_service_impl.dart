@@ -74,4 +74,111 @@ class ApiServiceImpl extends GetxService implements ApiService {
     }
     return null;
   }
+
+  @override
+  Future delete(String url) async {
+    headers["Authorization"] = "Bearer ${StoreToken.getToken()}";
+    var uri = Uri.parse(url);
+    var response = await httpClient.delete(uri, headers: headers);
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+    if (response.statusCode == 401) {
+      // call refresh token
+      var responseRefreshToken = await refreshToken(
+        RefreshTokenRequest(refreshToken: StoreToken.getRefreshToken()),
+      );
+      if (responseRefreshToken.accessToken == null) {
+        StoreToken.removeToken();
+        Get.offNamed("/login");
+        return null;
+      } else {
+        StoreToken.setRefresh(responseRefreshToken.refreshToken ?? "");
+        StoreToken.setToken(responseRefreshToken.accessToken ?? "");
+        // Retry
+        headers["Authorization"] = "Bearer ${StoreToken.getToken()}";
+        var retryResponse = await httpClient.delete(uri, headers: headers);
+        if (retryResponse.statusCode == 200) {
+          return retryResponse.body;
+        } else {
+          return null;
+        }
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future post(String url, {body}) async {
+    headers["Authorization"] = "Bearer ${StoreToken.getToken()}";
+    var uri = Uri.parse(url);
+    var response = await httpClient.post(uri, headers: headers, body: body);
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+    if (response.statusCode == 401) {
+      // call refresh token
+      var responseRefreshToken = await refreshToken(
+        RefreshTokenRequest(refreshToken: StoreToken.getRefreshToken()),
+      );
+      if (responseRefreshToken.accessToken == null) {
+        StoreToken.removeToken();
+        Get.offNamed("/login");
+        return null;
+      } else {
+        StoreToken.setRefresh(responseRefreshToken.refreshToken ?? "");
+        StoreToken.setToken(responseRefreshToken.accessToken ?? "");
+        // Retry
+        headers["Authorization"] = "Bearer ${StoreToken.getToken()}";
+        var retryResponse = await httpClient.post(
+          uri,
+          headers: headers,
+          body: body,
+        );
+        if (retryResponse.statusCode == 200) {
+          return retryResponse.body;
+        } else {
+          return null;
+        }
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future put(String url, {body}) async {
+    headers["Authorization"] = "Bearer ${StoreToken.getToken()}";
+    var uri = Uri.parse(url);
+    var response = await httpClient.put(uri, headers: headers, body: body);
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+    if (response.statusCode == 401) {
+      // call refresh token
+      var responseRefreshToken = await refreshToken(
+        RefreshTokenRequest(refreshToken: StoreToken.getRefreshToken()),
+      );
+      if (responseRefreshToken.accessToken == null) {
+        StoreToken.removeToken();
+        Get.offNamed("/login");
+        return null;
+      } else {
+        StoreToken.setRefresh(responseRefreshToken.refreshToken ?? "");
+        StoreToken.setToken(responseRefreshToken.accessToken ?? "");
+        // Retry
+        headers["Authorization"] = "Bearer ${StoreToken.getToken()}";
+        var retryResponse = await httpClient.put(
+          uri,
+          headers: headers,
+          body: body,
+        );
+        if (retryResponse.statusCode == 200) {
+          return retryResponse.body;
+        } else {
+          return null;
+        }
+      }
+    }
+    return null;
+  }
 }
