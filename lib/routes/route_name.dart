@@ -6,4 +6,5 @@ class RouteName {
   static final String adminDashboard = "/admin/dashboard";
   static final String adminPost = "/admin/posts";
   static final String adminPostForm = "/admin/posts/form";
+  static final String adminCategoryList = "/admin/categories";
 }

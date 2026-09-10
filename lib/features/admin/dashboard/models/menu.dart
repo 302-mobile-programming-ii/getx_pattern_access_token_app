@@ -16,7 +16,7 @@ class Menu {
         nameKh: "ប្រកាស",
         routeName: RouteName.adminPost,
       ),
-      Menu(id: 2, name: "Post Category", nameKh: "ប្រភេទប្រកាស"),
+      Menu(id: 2, name: "Post Category", nameKh: "ប្រភេទប្រកាស", routeName: RouteName.adminCategoryList),
       Menu(id: 3, name: "Articles", nameKh: "អត្ថបទ"),
       Menu(id: 4, name: "Settings", nameKh: "ការកំណត់"),
     ];

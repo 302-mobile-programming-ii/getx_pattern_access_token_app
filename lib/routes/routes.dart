@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:getx_pattern_access_token_app/features/admin/category/list/category_binding.dart';
+import 'package:getx_pattern_access_token_app/features/admin/category/list/category_view.dart';
 import 'package:getx_pattern_access_token_app/features/admin/dashboard/dashboard_binding.dart';
 import 'package:getx_pattern_access_token_app/features/admin/dashboard/dashboard_view.dart';
 import 'package:getx_pattern_access_token_app/features/admin/post/form/post_form_binding.dart';
@@ -26,6 +28,8 @@ class Routes {
       GetPage(name: RouteName.adminDashboard, page: ()=> DashboardView(), binding: DashboardBinding(), transition: Transition.cupertino),
       GetPage(name: RouteName.adminPost, page: ()=> PostView(), binding: PostBinding()),
       GetPage(name: RouteName.adminPostForm, page: ()=> PostFormView(), binding: PostFormBinding()),
+      GetPage(name: RouteName.adminCategoryList, page: ()=> CategoryView(), binding: CategoryBinding()),
+
     ];
   }
 }
